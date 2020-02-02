@@ -3,6 +3,7 @@ module github.com/julienschmidt/go-http-routing-benchmark
 go 1.13
 
 require (
+	github.com/IxDay/httprouter v1.3.1-0.20200202063951-cc564ef61b36
 	github.com/aerogo/aero v1.3.42
 	github.com/ant0ine/go-json-rest v3.3.2+incompatible
 	github.com/astaxie/beego v1.12.0
@@ -25,7 +26,7 @@ require (
 	github.com/gowww/router v0.0.0-20180327195201-5f9c626ef619
 	github.com/gravitational/trace v0.0.0-20190726142706-a535a178675f // indirect
 	github.com/jonboulle/clockwork v0.1.0 // indirect
-	github.com/julienschmidt/httprouter v1.3.0
+	github.com/julienschmidt/httprouter v1.3.1-0.20200114094804-8c9f31f047a3
 	github.com/konsorten/go-windows-terminal-sequences v1.0.2 // indirect
 	github.com/labstack/echo/v4 v4.1.11
 	github.com/lunny/log v0.0.0-20160921050905-7887c61bf0de

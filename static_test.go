@@ -189,6 +189,7 @@ var (
 	staticGoRestful       http.Handler
 	staticGorillaMux      http.Handler
 	staticGowwwRouter     http.Handler
+	staticIxDayRouter     http.Handler
 	staticHttpRouter      http.Handler
 	staticHttpTreeMux     http.Handler
 	staticKocha           http.Handler
@@ -268,6 +269,9 @@ func init() {
 	})
 	calcMem("GowwwRouter", func() {
 		staticGowwwRouter = loadGowwwRouter(staticRoutes)
+	})
+	calcMem("IxDayRouter", func() {
+		staticIxDayRouter = loadIxDayRouter(staticRoutes)
 	})
 	calcMem("HttpRouter", func() {
 		staticHttpRouter = loadHttpRouter(staticRoutes)
@@ -376,6 +380,9 @@ func BenchmarkGorillaMux_StaticAll(b *testing.B) {
 }
 func BenchmarkGowwwRouter_StaticAll(b *testing.B) {
 	benchRoutes(b, staticGowwwRouter, staticRoutes)
+}
+func BenchmarkIxDayRouter_StaticAll(b *testing.B) {
+	benchRoutes(b, staticIxDayRouter, staticRoutes)
 }
 func BenchmarkHttpRouter_StaticAll(b *testing.B) {
 	benchRoutes(b, staticHttpRouter, staticRoutes)

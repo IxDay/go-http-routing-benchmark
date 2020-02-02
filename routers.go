@@ -34,6 +34,7 @@ import (
 	"github.com/gocraft/web"
 	"github.com/gorilla/mux"
 	gowwwrouter "github.com/gowww/router"
+	ixdayrouter "github.com/IxDay/httprouter"
 	"github.com/julienschmidt/httprouter"
 	"github.com/labstack/echo/v4"
 	llog "github.com/lunny/log"
@@ -893,6 +894,36 @@ func loadGowwwRouter(routes []route) http.Handler {
 func loadGowwwRouterSingle(method, path string, handler http.Handler) http.Handler {
 	router := gowwwrouter.New()
 	router.Handle(method, path, handler)
+	return router
+}
+
+// IxDayHttpRouter
+func ixdayRouterHandle(_ http.ResponseWriter, _ *http.Request, _ ixdayrouter.Params) {}
+
+func ixdayRouterHandleWrite(w http.ResponseWriter, _ *http.Request, ps ixdayrouter.Params) {
+	io.WriteString(w, ps.ByName("name"))
+}
+
+func ixdayRouterHandleTest(w http.ResponseWriter, r *http.Request, _ ixdayrouter.Params) {
+	io.WriteString(w, r.RequestURI)
+}
+
+func loadIxDayRouter(routes []route) http.Handler {
+	h := ixdayRouterHandle
+	if loadTestHandler {
+		h = ixdayRouterHandleTest
+	}
+
+	router := ixdayrouter.New()
+	for _, route := range routes {
+		router.Handle(route.method, route.path, h)
+	}
+	return router
+}
+
+func loadIxDayRouterSingle(method, path string, handle ixdayrouter.Handle) http.Handler {
+	router := ixdayrouter.New()
+	router.Handle(method, path, handle)
 	return router
 }
 

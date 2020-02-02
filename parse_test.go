@@ -73,6 +73,7 @@ var (
 	parseGoRestful       http.Handler
 	parseGorillaMux      http.Handler
 	parseGowwwRouter     http.Handler
+	parseIxDayRouter     http.Handler
 	parseHttpRouter      http.Handler
 	parseHttpTreeMux     http.Handler
 	parseKocha           http.Handler
@@ -141,6 +142,9 @@ func init() {
 	})
 	calcMem("GowwwRouter", func() {
 		parseGowwwRouter = loadGowwwRouter(parseAPI)
+	})
+	calcMem("IxDayRouter", func() {
+		parseIxDayRouter = loadIxDayRouter(parseAPI)
 	})
 	calcMem("HttpRouter", func() {
 		parseHttpRouter = loadHttpRouter(parseAPI)
@@ -262,6 +266,10 @@ func BenchmarkGorillaMux_ParseStatic(b *testing.B) {
 func BenchmarkGowwwRouter_ParseStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/1/users", nil)
 	benchRequest(b, parseGowwwRouter, req)
+}
+func BenchmarkIxDayRouter_ParseStatic(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/1/users", nil)
+	benchRequest(b, parseIxDayRouter, req)
 }
 func BenchmarkHttpRouter_ParseStatic(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/1/users", nil)
@@ -399,6 +407,10 @@ func BenchmarkGowwwRouter_ParseParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/1/classes/go", nil)
 	benchRequest(b, parseGowwwRouter, req)
 }
+func BenchmarkIxDayRouter_ParseParam(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/1/classes/go", nil)
+	benchRequest(b, parseIxDayRouter, req)
+}
 func BenchmarkHttpRouter_ParseParam(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/1/classes/go", nil)
 	benchRequest(b, parseHttpRouter, req)
@@ -535,6 +547,10 @@ func BenchmarkGowwwRouter_Parse2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/1/classes/go/123456789", nil)
 	benchRequest(b, parseGowwwRouter, req)
 }
+func BenchmarkIxDayRouter_Parse2Params(b *testing.B) {
+	req, _ := http.NewRequest("GET", "/1/classes/go/123456789", nil)
+	benchRequest(b, parseIxDayRouter, req)
+}
 func BenchmarkHttpRouter_Parse2Params(b *testing.B) {
 	req, _ := http.NewRequest("GET", "/1/classes/go/123456789", nil)
 	benchRequest(b, parseHttpRouter, req)
@@ -653,6 +669,9 @@ func BenchmarkGorillaMux_ParseAll(b *testing.B) {
 }
 func BenchmarkGowwwRouter_ParseAll(b *testing.B) {
 	benchRoutes(b, parseGowwwRouter, parseAPI)
+}
+func BenchmarkIxDayRouter_ParseAll(b *testing.B) {
+	benchRoutes(b, parseIxDayRouter, parseAPI)
 }
 func BenchmarkHttpRouter_ParseAll(b *testing.B) {
 	benchRoutes(b, parseHttpRouter, parseAPI)

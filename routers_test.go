@@ -30,6 +30,7 @@ var (
 		{"GorillaMux", loadGorillaMux},
 		{"GowwwRouter", loadGowwwRouter},
 		{"HttpRouter", loadHttpRouter},
+		{"IxDayRouter", loadIxDayRouter},
 		{"HttpTreeMux", loadHttpTreeMux},
 		//{"Kocha", loadKocha},
 		{"LARS", loadLARS},
